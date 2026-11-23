@@ -1,130 +1,88 @@
-# Shakkel Learning Hub - Enterprise Workforce Training & LMS Platform
+<div align="center">
 
-[![Production Status](https://img.shields.io/badge/Status-Production%20Live-brightgreen?style=for-the-badge)](https://learn.shakkel.store/)
-[![Client](https://img.shields.io/badge/Client-Shakkel%20(شَكَّل)-0052CC?style=for-the-badge)](https://shakkel.store/)
-[![Live Platform](https://img.shields.io/badge/Domain-learn.shakkel.store-green?style=for-the-badge)](https://learn.shakkel.store/)
-[![Frontend](https://img.shields.io/badge/Frontend-React%2019%20%7C%20TypeScript-61DAFB?style=for-the-badge)](https://learn.shakkel.store/)
-[![Backend](https://img.shields.io/badge/Backend-Supabase%20%7C%20PostgreSQL-3ECF8E?style=for-the-badge)](https://learn.shakkel.store/)
-[![Styling](https://img.shields.io/badge/Styling-Tailwind%20CSS%20v4-38B2AC?style=for-the-badge)](https://learn.shakkel.store/)
+# Shakkel Corporate LMS (`learn.shakkel.store`)
 
-Production URL: [https://learn.shakkel.store/](https://learn.shakkel.store/)  
-Client: Shakkel Industrial & Commercial Solutions (شَكَّل)  
-Category: Enterprise Corporate Learning Management System (LMS) & Workforce Upskilling Platform  
-Lead Architect & Developer: Abdulqader Alshihabi  
+**Bilingual Arabic RTL / English SSR Learning Platform Featuring an Integer-Halala & ZATCA Phase-1 QR Billing Ledger, Anti-Cheating Assessment Engine, Three.js 3D STL CAD Inspection, and Saudi PDPL Compliance**
 
----
+[![Production Live](https://img.shields.io/badge/LIVE_PLATFORM-learn.shakkel.store-10B981?style=for-the-badge&logo=googlechrome&logoColor=white)](https://learn.shakkel.store/)
+[![Frontend](https://img.shields.io/badge/React_19_+_TanStack_Router-Vite_6_SSR_Prerender-3B82F6?style=for-the-badge&logo=react&logoColor=61DAFB)](#bilingual-ssr--supabase-edge-architecture)
+[![Commerce](https://img.shields.io/badge/ZATCA_Phase--1_QR_+_Moyasar-Halalas_Ledger-F59E0B?style=for-the-badge)](#solving-production-lms-billing--pdpl-challenges)
+[![Compliance](https://img.shields.io/badge/Saudi_PDPL_+_155%2B_RLS_Policies-7_DB_Roles-8B5CF6?style=for-the-badge&logo=postgresql&logoColor=white)](#financial-security--saudi-pdpl-guarantees)
 
-## Commercial Notice & IP Confidentiality
-
-> [!IMPORTANT]
-> Commercial In-Production Platform Notice:  
-> This repository serves as an Architectural Case Study and Technical Specification for the Shakkel Corporate Learning Hub. Because this platform powers commercial enterprise operations and corporate workforce training under non-disclosure and commercial agreements, backend database seeds, sensitive environment variables, and proprietary client source code are maintained in Shakkel's private production infrastructure.
+[Visit Live LMS (`learn.shakkel.store`)](https://learn.shakkel.store/) &nbsp;|&nbsp; [Problems Solved](#solving-production-lms-billing--pdpl-challenges) &nbsp;|&nbsp; [Architecture](#bilingual-ssr--supabase-edge-architecture) &nbsp;|&nbsp; [Billing & PDPL](#financial-security--saudi-pdpl-guarantees) &nbsp;|&nbsp; [Extensibility](#isomorphic--provider-extensibility-seams)
 
 ---
 
-## Executive Summary
+| Platform Layer | Verified Production Stack | Engineering Guarantee |
+| :--- | :--- | :--- |
+| **Frontend & SEO Build** | `React 19.2.8`, `TS 5.9.3`, `Vite 6.4.5`, `TanStack Router/Query v5` | Static build-time Arabic `/` + English `/en/` SEO prerendering + `hreflang` |
+| **Interactive Media** | `Tiptap 3.32.0`, `DOMPurify 3.4.17`, **`Three.js 0.186.1` (`STLLoader`)**, `pdfjs-dist` | Sanitized course lessons + lazy WebGL 3D manufacturing CAD viewer inside modules |
+| **Edge Functions (Deno)** | `7` Functions (`payments-verify/webhook/reconcile/admin`, `exports`, `admin-users`, `send-email`) | Authoritative Moyasar `1.14.0` verification + async `100K`-row streaming exports |
+| **Database Kernel** | `Supabase PostgreSQL 15` (**`155+` RLS policies**, **7 DB roles**, `SECURITY DEFINER`) | `anon` holds zero write grants; `(SELECT auth.uid())` & owned-set cached policies |
+| **Financial & Tax Compliance** | `halalas` integer ledger, `payment_events` immutable log, **`zatca_tlv`** | Unidirectional FSM triggers + 5-tag UTF-8 TLV ZATCA Phase-1 QR invoices & credit notes |
+| **Privacy Governance** | Saudi PDPL RPCs (`my_data_export()`, `pdpl_erase_user()`) | Full JSON export (secrets stripped) + anonymized erasure preserving tax/cert records |
 
-Shakkel Learning Hub (`learn.shakkel.store`) is a high-performance, enterprise-grade Learning Management System (LMS) engineered to support corporate workforce onboarding, professional industrial certifications, and internal employee skills development. 
-
-Built with React 19, TypeScript, TanStack Router, Tailwind CSS v4, and Supabase / PostgreSQL, the platform delivers zero-latency client-side navigation, robust server-enforced security models, and end-to-end educational administration.
-
-### Core Business Capabilities
-- **Enterprise Multi-Tenancy & RBAC**: Strict separation of concerns between Super Administrators, Platform Administrators, Content Editors, Instructors, Corporate Partners, and Enrolled Learners.
-- **Rich-Text Curriculum Authoring**: In-browser WYSIWYG course builder powered by Tiptap with support for interactive media, structured chapters, and prerequisite gating.
-- **Exam Integrity & Assessment Engine**: Automated evaluation system with randomized question banks, timed completion windows, attempt restrictions, and anti-cheating mechanisms.
-- **Corporate Analytics & XLSX Exports**: Real-time workforce progress dashboards, department attendance sheets, and on-demand Excel workbook generation for corporate HR departments.
-- **Digital Credentialing & PDF Verification**: Automated generation of tamper-evident completion certificates with unique verification identifiers.
-- **Bilingual Interface**: Native Arabic (RTL) and English (LTR) user experience powered by `i18next`.
+</div>
 
 ---
 
-## System Architecture
+## Solving Production LMS, Billing & PDPL Challenges
 
-```
-┌────────────────────────────────────────────────────────────────────────┐
-│               Client-Side Web Application (React 19 + Vite)            │
-│  - Routing & Navigation: TanStack Router (File-based, Type-safe)       │
-│  - Data Fetching & Caching: TanStack React Query v5                    │
-│  - UI Tokens & Components: Radix UI Primitives + Tailwind CSS v4       │
-│  - Rich Text Engine: Tiptap Core (ProseMirror Headless)                │
-│  - Bilingual Localization: i18next (Arabic RTL / English LTR)          │
-└──────────────────────────────────┬─────────────────────────────────────┘
-                                   │
-                                   ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   Secure Edge & Authorization Layer                    │
-│  - Route Guards: Authenticated Sessions, Role Verification             │
-│  - Token Management: Supabase GoTrue JWT & Secure Cookies              │
-│  - Edge Functions: Administrative Privileges & User Governance         │
-└──────────────────────────────────┬─────────────────────────────────────┘
-                                   │
-                                   ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│               PostgreSQL Database & Relational Storage                 │
-│  - Row-Level Security (RLS): Granular per-role access policies         │
-│  - Security Definer RPCs: Atomic multi-step business transactions      │
-│  - Media Storage: Supabase Storage Buckets for course assets & PDFs    │
-│  - Audit Logs: Immutable tracking for student exams & certifications   │
-└────────────────────────────────────────────────────────────────────────┘
-```
+Operating a live Saudi commercial training platform (`learn.shakkel.store`) for individual learners and corporate teams introduced four deep engineering problems beyond typical course players: floating-point checkout drift and spoofable 3DS redirects, student browser inspection of exam answers or double-tab submissions, SQL trigger storms from frequent video playback heartbeats, and reconciling Saudi PDPL user erasure requests against mandatory VAT invoice and credential retention laws.
+
+<div align="center">
+  <img src="assets/diagrams/diagram-1-problems-solved.png" alt="Four Production LMS, ZATCA Billing, Exam Integrity and PDPL Challenges Solved" width="100%" />
+</div>
+
+### How Every Core Failure Mode Is Prevented
+
+1. **Integer-Halala Billing & Server-Verified Checkout (`payments_core.sql`, `_shared/payments/*`):** Stores prices, discounts, VAT (`vat_halalas`, `vat_rate_bp`), and refunds purely in integer halalas (`sar_to_halalas`, `money_div_half_up`). Trigger `guard_order_update_trg` blocks altering settled totals or currencies and enforces a one-way status FSM (`pending -> paid|failed|cancelled`; `paid -> refunded_partial|refunded_full`). Every payment signal (`payments-verify`, `payments-webhook` via `safeEqual`, and hourly `payments-reconcile`) re-queries **Moyasar (`1.14.0`)** directly via HTTP Basic and settles atomically through SQL `apply_provider_result`, issuing 5-tag UTF-8 TLV **ZATCA Phase-1 QR** `invoices` and proportional `credit_notes`.
+2. **Zero-Exposure Exam Engine (`quiz_engine.sql`):** Supports 10 question types (from MCQ & matching to timed essays and upload assignments) while denying students `SELECT` access on `quiz_questions.answer_key`. `quiz_question_payload` returns stripped questions with deterministically seeded MD5 permutations (`quiz_perm`), prevents concurrent sessions via `quiz_attempts_one_active_uq` + `pg_advisory_xact_lock`, autosaves answers (`30s` grace, `allow_back=false` freeze), and closes overtime attempts automatically.
+3. **Heartbeat-Split Progress & Set-Based Unlocking (`b2_progress_performance.sql`):** Decouples high-frequency video watch heartbeats (`touch_enrollment_activity()`) from completion cascades, batches progress over set-based RPCs (`course_lesson_status_bulk`, `module_unlock_states`), and triggers automatic `shkl-XXXXXXXX` certificates (`trg_certificate_auto_issue`).
+4. **Zip-Bomb & XSS Immunity (`export-core.ts`, `sanitize.ts`):** Browser `.xlsx` imports pre-scan ZIP headers against `10 MB` file, `100` entry, `20 MB` decompressed, and `5,000` row limits (`fflate`), while lesson HTML passes strict `DOMPurify` tag/attribute sanitization.
 
 ---
 
-## Technical Highlights & Implementation Details
+## Bilingual SSR & Supabase Edge Architecture
 
-### 1. Robust Server-Enforced Security Matrix (PostgreSQL RLS)
-Platform security does not rely solely on front-end route guards. Every database operation is validated at the database layer via PostgreSQL Row Level Security (RLS):
-- `anon`: Can query published course overviews and public metadata without access to protected lessons or corporate materials.
-- `student`: Can view only enrolled curriculum lessons, submit assessment answers, and access earned credentials.
-- `instructor`: Can create, edit, and organize modules for assigned courses, inspect enrolled trainees, and log session attendance.
-- `editor` / `admin`: Full content administration across the platform catalog.
-- `super_admin`: System settings, financial ledger auditing, and role provisioning via security-definer procedures.
+<div align="center">
+  <img src="assets/diagrams/diagram-2-architecture.png" alt="React 19 Bilingual Prerender, 7 Deno Edge Functions and PostgreSQL 15 155+ RLS Architecture" width="100%" />
+</div>
 
-### 2. High-Performance Front-End Stack
-- **React 19 & TanStack Router**: Type-safe search parameters, route loading boundaries, and nested layouts for administrative and student dashboards.
-- **Tailwind CSS v4 Engine**: Modern styling engine delivering micro-optimized CSS bundles, dark mode, and smooth transitions.
-- **TanStack React Query v5**: Stale-while-revalidate caching, optimistic updates for quiz progression, and automated invalidation upon curriculum revisions.
-
-### 3. Examination Integrity & Verification Engine
-- Configurable examination parameters: maximum attempts, countdown timers, passing thresholds, and immediate feedback toggles.
-- Anti-tampering checks ensuring submission timestamps match backend transaction records.
-- PDF certificate issuance leveraging `pdfjs-dist` for dynamic client-side rendering and cryptographic verification QR codes.
-
-### 4. Corporate Reporting & Export Capabilities
-- Built-in report generator delivering multi-sheet Microsoft Excel (`.xlsx`) workbooks containing employee training hours, assessment scores, and certification statuses.
-- Interactive Recharts visualization panels for administrators to track monthly active learners, course completion rates, and department performance.
+- **Dual Static Prerender + 3D Lesson Media (`vite.config.ts`, `src/prerender/entry.ts`):** Compiles completely independent Arabic (`/` RTL) and English (`/en/` LTR) SEO HTML shells with `<noscript>` fallbacks and Hostinger `.htaccess` rewrites (`_app.html`, `en/_app.html`), paired inside lessons with lazy-loaded **Three.js 3D STL CAD geometry previewers** (`stl-viewer.tsx`) for industrial engineering coursework.
+- **Public Verification & Staff Compensation (`admin-users`, `verify_certificate`):** Public certificate checks expose minimal non-PII verification metadata while staff account lifecycle actions execute through compensating Deno Edge handlers.
 
 ---
 
-## Technology Stack
+## Financial Security & Saudi PDPL Guarantees
 
-| Layer | Technologies and Libraries |
-| :--- | :--- |
-| **Frontend Framework** | React 19, TypeScript, Vite 6 |
-| **Routing & Navigation** | TanStack Router (`@tanstack/react-router`) |
-| **Server State & Cache** | TanStack React Query v5 |
-| **Styling & UI Tokens** | Tailwind CSS v4, Radix UI Primitives, Lucide Icons |
-| **Content Authoring** | Tiptap (ProseMirror Headless Editor) |
-| **Data Visualization** | Recharts (Responsive Line, Bar, and Area Charts) |
-| **Document Processing** | PDF.js (`pdfjs-dist`), FFlate, XLSX Generators |
-| **Localization** | i18next (Arabic RTL and English LTR) |
-| **Backend & Database** | Supabase (PostgreSQL 15), Row Level Security (RLS), Edge Functions |
-| **Authentication** | Supabase Auth (JWT, Role Claims, Session Recovery) |
+<div align="center">
+  <img src="assets/diagrams/diagram-3-billing-rbac.png" alt="Halalas Order State Machine, 7-Role RLS Isolation and Saudi PDPL Erasure Flow" width="100%" />
+</div>
+
+- **Strict 7-Role PostgreSQL Matrix (`anon -> student -> instructor -> editor -> corporate_partner -> admin -> super_admin`):** `b1_security_integrity.sql` stripped all write grants from `anon`; public lead/contact endpoints route strictly through SQL rate-limited functions (`SH429` at `3/10m`, `10/day`, `100/hr`), bank receipt uploads bind by regex to `users/<uid>/orders/<order_id>/...` in private storage reviewed by `super_admin`, and `guard_card_payments_flag` locks payment toggles solely to `service_role`.
+- **PDPL Right of Access & Statutory Erasure (`pdpl_my_data.sql`):** `my_data_export()` compiles complete user activity JSON (stripping password hashes and internal staff notes), whereas `pdpl_erase_user()` purges PII, IPs, session tokens, messages, waitlist emails, and Storage objects while legally preserving anonymized invoices, payments, grades, `shkl-XXXXXXXX` certificates, and `audit_logs` (`account_is_staff` blocks staff self-wipe).
+- **Transport Hardening (`public/.htaccess`):** Enforces 1-year `HSTS`, `X-Frame-Options: DENY`, `nosniff`, restrictive CSP-Report-Only allowlists, and strict `404` responses on missing asset probes.
 
 ---
 
-## Production Deployment
+## Isomorphic & Provider Extensibility Seams
 
-The platform is deployed and operational at:
-- **Production Host**: [https://learn.shakkel.store/](https://learn.shakkel.store/)
-- **Parent Enterprise Domain**: [https://shakkel.store/](https://shakkel.store/)
+<div align="center">
+  <img src="assets/diagrams/diagram-4-extensibility-seams.png" alt="Four Extensibility Seams: PaymentProvider Adapter, Shared export-core.ts, Bilingual Build Plugins and STL Lessons" width="100%" />
+</div>
+
+1. **Swappable Gateway Adapters (`PaymentProvider`):** Decouples verification, webhooks, hourly reconciliation, and partial/full refunds from vendor schemas—adding HyperPay or PayTabs requires only implementing one adapter.
+2. **Isomorphic Export Core (`_shared/export-core.ts`):** Zero-dependency `.xlsx` (`fflate`) + CSV formula-safe engine (`safeCell`, Riyadh timezone formatting) imported identically in browser bundles and `100,000`-row async Edge workers (`EdgeRuntime.waitUntil`).
+3. **Four-Plugin Vite SSR Pipeline (`preloadTextFont`, `preloadApp`, `seoFiles`, `prerender`):** Dynamically drives Arabic and English localized static builds from `BASEPATH`.
 
 ---
 
-## Engineering Credits
+> [!NOTE]
+> Live commercial codebase remains proprietary; this repository preserves verified system architecture documentation alongside the public production platform.
 
-**Abdulqader Alshihabi**  
-Computer Science Graduate | Software & AI Engineer  
-- Portfolio: [https://abdulqader-alshihabi.github.io/](https://abdulqader-alshihabi.github.io/)  
-- GitHub: [@Abdulqader-Alshihabi](https://github.com/Abdulqader-Alshihabi)  
-- Email: [abdulqader.moh.2003@gmail.com](mailto:abdulqader.moh.2003@gmail.com)  
+<div align="center">
+
+[Visit Live Shakkel Learning Hub](https://learn.shakkel.store/) &nbsp;|&nbsp; [Shakkel Industrial](https://shakkel.store/) &nbsp;|&nbsp; [Portfolio](https://abdulqader-alshihabi.github.io/) &nbsp;|&nbsp; Built by **Abdulqader Alshihabi**
+
+</div>
