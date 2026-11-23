@@ -83,6 +83,6 @@ Operating a live Saudi commercial training platform (`learn.shakkel.store`) for 
 
 <div align="center">
 
-[Visit Live Shakkel Learning Hub](https://learn.shakkel.store/) &nbsp;|&nbsp; [Shakkel Industrial](https://shakkel.store/) &nbsp;|&nbsp; [Portfolio](https://abdulqader-alshihabi.github.io/) &nbsp;|&nbsp; Built by **Abdulqader Alshihabi**
+[Visit Live Shakkel Learning Hub](https://learn.shakkel.store/) &nbsp;|&nbsp; [Shakkel Industrial](https://shakkel.store/) &nbsp;|&nbsp; [Portfolio](https://abdulqader-alshihabi.github.io/) &nbsp;|&nbsp; [LinkedIn](https://www.linkedin.com/in/abdulqader-alshihabi-859b19260/) &nbsp;|&nbsp; Built by **Abdulqader Alshihabi**
 
 </div>
